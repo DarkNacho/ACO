@@ -9,11 +9,8 @@ public:
     Graph();
     std::vector<Vertex> vertexes;
     Graph(int _vertex);
-    void addEdge(edge e);
     void addEdge(int u, int v);
-    void addVertex(Vertex v);
     void addVertex(PT p);
-    void addVertex(float x, float y);
     std::string tostring();
 };
 

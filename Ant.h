@@ -19,7 +19,6 @@ public:
     Ant(int vertex, Vertex _init);
     std::vector<std::pair<int,int>> path; //
     double move(Vertex v);
-    bool compare(edge e1);
 };
 
 

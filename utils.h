@@ -1,5 +1,5 @@
 #include <string>
-#include <math.h>
+#include <cmath>
 #include <vector>
 #include <algorithm>
 #ifndef ACO_UTILS_H

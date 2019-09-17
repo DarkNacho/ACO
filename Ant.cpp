@@ -23,12 +23,6 @@ Ant::Ant(int vertex, Vertex _init)
     path.push_back({vertex,vertex});
     visited[vertex] = true;
 }
-
-/**
- *
- * @param v
- * @return index of the edge
- */
 int Ant::roulette(std::vector<edge> v)
 {
     double r = rand() / (RAND_MAX + 1.);
@@ -42,14 +36,8 @@ int Ant::roulette(std::vector<edge> v)
         total += temp;
         if( r <= (temp / total) && !visited[i]) selected = v[i].v;
     }
-
     return selected;
 }
-bool Ant::compare(edge e1)
-{
-    return (visited[e1.v]);
-}
-
 double Ant::move(Vertex v)
 {
 
@@ -58,8 +46,7 @@ double Ant::move(Vertex v)
         if(!visited[i]) sor.push_back(v.edges[i]);
     std::sort(sor.begin(), sor.end(), std::greater<edge>());
     int u = 0;
-    do
-        u = roulette(sor);
+    do u = roulette(sor);
     while(visited[u]);
     //visited[v.edges[u].u] = true;
     visited[v.edges[u].v] = true;
