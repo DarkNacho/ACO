@@ -9,7 +9,6 @@
 
 int main()
 {
-
     //graph init
     const int n = 280;
     Graph graph;
