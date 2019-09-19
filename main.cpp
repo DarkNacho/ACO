@@ -3,6 +3,9 @@
 #include "Graph.h"
 #include "Ant.h"
 #include "utils.h"
+#define alpha 1
+#define beta 5
+#define rho 0.2  //evaporation rate
 
 int main()
 {
@@ -20,41 +23,42 @@ int main()
     {
         for (int j = 0; j < n; ++j)
             graph.addEdge(i, j); //connect every vertex with edges
-
-        //init pheromones with 1
-        graph.vertexes[i].probablitySum(1,1);
-        graph.vertexes[i].updatePheromone(1,1,0,0);
+        graph.vertexes[i].setPheromones(1);  //init pheromones
     }
     //end graph init
 
     //ants...
-    double pheromones = 0;
     double minDist = INFINITY;
     std::vector<std::pair<int,int>> bestPath(n+1);
-    for(int k = 0; k<1000; ++k) // k = number of ants
+    for(int i =0; i<36; ++i) //iterations
     {
-        //make tour with k ant
-        double dist=0;
-        Ant ant(0,graph.vertexes[0],1,5);
-        while(ant.path.size() < n)
-            dist += ant.move(graph.vertexes[ant.path.back().second]);
-        dist += graph.vertexes[ant.path.back().second].edges[0].d;
-        ant.path.push_back({ant.path.back().second,0});
-        //end tour
-        if(dist < minDist) //check if that solution is better
+        double pheromones = 0;
+        for (int k = 0; k < n; ++k) // k = number of ants ,
         {
-            minDist = dist;
-            std::copy(ant.path.begin(),ant.path.end(), bestPath.begin());
+            //make tour with k ant
+            double dist = 0;
+            Ant ant(0, graph.vertexes[0], alpha, beta);
+            while (ant.path.size() < n)
+                dist += ant.move(graph.vertexes[ant.path.back().second]);
+            dist += graph.vertexes[ant.path.back().second].edges[0].d;
+            ant.path.push_back({ant.path.back().second, 0});
+            //end tour
+            if (dist < minDist) //check if that solution is better
+            {
+                minDist = dist;
+                std::copy(ant.path.begin(), ant.path.end(), bestPath.begin());
+            }
+            pheromones += 1/dist;
         }
+        //optional, you could update after each ant. In this case is after each iteration
         //update pheromones
-        pheromones += 1/dist;
-        for(int i =0; i<n; ++i)
-            graph.vertexes[i].updatePheromone(1,5,pheromones,0.1);
+        for (int i = 0; i < n; ++i)
+            graph.vertexes[i].updatePheromone(alpha, beta, pheromones, rho);
     }
-
     //Print solution
     for(int i=0; i<n; ++i)
-        std::cout << bestPath[i].second << " - " <<bestPath[i+1].second << std::endl;
-    std::cout << "Distance: " << minDist << std::endl;
+        std::cout << bestPath[i].second << " ";
+    std::cout << "\nDistance: " << minDist << std::endl;
+
     return 0;
 }

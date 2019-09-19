@@ -1,3 +1,0 @@
-/home/darknacho/CLionProjects/ACO/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/darknacho/CLionProjects/ACO/cmake-build-debug/CMakeFiles/ACO.dir
-/home/darknacho/CLionProjects/ACO/cmake-build-debug/CMakeFiles/edit_cache.dir

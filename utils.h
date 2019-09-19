@@ -37,18 +37,7 @@ public:
     std::vector<edge> edges;
     Vertex() {};
     Vertex(PT _p): p(_p){}
-    /***
-     * first update the probablity with probablitySum, then you can use this variable.
-     */
-    double  probability;
 
-    double probablitySum(double alpha, double beta)
-    {
-        probability = 0;
-        for(edge e: edges)
-            probability += e.getProbability(alpha,beta);
-        return probability;
-    }
     /***
      * This will update every edge pheromone, with their evaporation and then adding the new pheromones.
      * @param pheromones
@@ -60,10 +49,12 @@ public:
         {
             edges[i].evaporatePheromone(evaporation);
             edges[i].addPheromone(pheromones);
-            edges[i].getProbability(alpha,beta); //just for update
         }
-        this->probablitySum(alpha,beta);
-        //std::sort(edges.begin(), edges.end(), std::greater<edge>()); // for a more easy roulete
+     }
+    void setPheromones(double pheromone)
+    {
+        for(int i =0; i<edges.size(); ++i)
+            edges[i].pheromone = 1;
     }
 
 

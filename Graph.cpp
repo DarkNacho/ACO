@@ -28,7 +28,7 @@ std::string Graph::tostring()
     for(Vertex v: vertexes)
     {
         msg += "Node: " + v.p.tostring() + "\n";
-        msg += "Probability: " + std::to_string(v.probability) + "\n";
+        //msg += "Probability: " + std::to_string(v.probability) + "\n";
         msg += "\tChild:\n";
         for(edge e: v.edges)
             msg += "\t\t" + e.tostring() + "\n";

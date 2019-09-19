@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/ACO.dir/main.cpp.o CMakeFiles/ACO.dir/Graph.cpp.o CMakeFiles/ACO.dir/Ant.cpp.o  -o ACO 
