@@ -1,5 +1,7 @@
-#include <iostream>
+//#include <iostream>
 #include <string>
+#include <map>
+#include <fstream>
 #include "Graph.h"
 #include "Ant.h"
 #include "utils.h"
@@ -7,17 +9,32 @@
 #define beta 5
 #define rho 0.2  //evaporation rate
 
-int main()
+int main(int argc , char *argv[])
 {
     //graph init
-    const int n = 280;
+    int n;
+    std::ifstream cin(argv[1]);
+    std::string test;
+    std::map<int,int> graphMap;
     Graph graph;
+
+    //reading first lines of the tsp file
+    getline(cin, test);
+    getline(cin, test);
+    getline(cin, test);
+    cin >> test >> n;
+    getline(cin, test);
+    getline(cin, test);
+    getline(cin, test);
+    //reading tsp nodes and creating graph
     for(int i =0; i<n; ++i)
     {
         int k, u,v;
-        std::cin >> k >> u >> v;
+        cin >> k >> u >> v;
+        graphMap[k] = i; //mapping graph index
         graph.addVertex(PT(u,v)); //initial Vertex
     }
+    //connecting all nodes with all
     for(int i =0; i<n; ++i)
     {
         for (int j = 0; j < n; ++j)
@@ -56,8 +73,7 @@ int main()
     }
     //Print solution
     for(int i=0; i<n; ++i)
-        std::cout << bestPath[i].second << " ";
-    std::cout << "\nDistance: " << minDist << std::endl;
-
+        printf("%d ", graphMap[bestPath[i].second]);
+    printf("\nDistance: %.2lf\n", minDist);
     return 0;
 }
