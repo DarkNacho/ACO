@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Ant.h"
-#define rnd rand() / (RAND_MAX + 1.)
 
 Ant::Ant(int vertex, Vertex _init, double _alpha, double _beta)
 {
@@ -25,6 +24,7 @@ Ant::Ant(int vertex, Vertex _init)
 }
 int Ant::roulette(std::vector<edge> v)
 {
+    srand(time(NULL));
     double r = rand() / (RAND_MAX + 1.);
     int selected = v[0].v;
     double total = v[0].getProbability(alpha,beta);

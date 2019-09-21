@@ -37,20 +37,11 @@ public:
     std::vector<edge> edges;
     Vertex() {};
     Vertex(PT _p): p(_p){}
-
-    /***
-     * This will update every edge pheromone, with their evaporation and then adding the new pheromones.
-     * @param pheromones
-     * @param evaporation
-     */
-    void updatePheromone(double alpha, double beta, double pheromones, double evaporation)
+    void evaporatePheromones(double evaporation)
     {
-        for(int i=0; i<edges.size();++i)
-        {
+        for(int i=0;i<edges.size();++i)
             edges[i].evaporatePheromone(evaporation);
-            edges[i].addPheromone(pheromones);
-        }
-     }
+    }
     void setPheromones(double pheromone)
     {
         for(int i =0; i<edges.size(); ++i)
