@@ -8,11 +8,12 @@
 int main(int argc , char *argv[])
 {
     //graph init
-    int n;
+    int n,k;
     double  alpha, beta, rho;
-    alpha = std::stod(argv[2]);
-    beta = std::stod(argv[3]);
-    rho = std::stod(argv[4]);
+    k = std::stoi(argv[2]);
+    alpha = std::stod(argv[3]);
+    beta = std::stod(argv[4]);
+    rho = std::stod(argv[5]);
     std::ifstream cin(argv[1]);
     std::string test;
     std::map<int, int> graphMap;
@@ -45,7 +46,8 @@ int main(int argc , char *argv[])
     double minDist = INFINITY;
     std::vector<std::pair<int, int>> bestPath(n + 1);
 
-    for (int k = 0; k < 1000; ++k) // k = number of ants ,
+    //aco end
+    while (k--)
     {
         //make tour with k ant
         double dist = 0;
@@ -74,7 +76,6 @@ int main(int argc , char *argv[])
             std::copy(ant.path.begin(), ant.path.end(), bestPath.begin());
         }
     }
-    //aco end
 
     //Print solution
     for (int i = 0; i < n; ++i)
